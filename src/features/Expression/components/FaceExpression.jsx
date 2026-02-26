@@ -10,12 +10,14 @@ export default function FaceExpression() {
   const landmarkerRef = useRef(null);
   const animationRef = useRef(null);
   const [expression, setExpression] = useState("Detecting...");
+
   useEffect(() => {
     let stream;
     const init = async () => {
       const vision = await FilesetResolver.forVisionTasks(
         "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
       );
+
       landmarkerRef.current =
         await FaceLandmarker.createFromOptions(vision, {
           baseOptions: {
@@ -26,6 +28,8 @@ export default function FaceExpression() {
           runningMode: "VIDEO",
           numFaces: 1,
         });
+
+        
       stream = await navigator.mediaDevices.getUserMedia({
         video: true,
       });
