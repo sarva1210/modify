@@ -29,14 +29,18 @@ export default function FaceExpression() {
           numFaces: 1,
         });
 
-        
+
       stream = await navigator.mediaDevices.getUserMedia({
         video: true,
       });
+
       videoRef.current.srcObject = stream;
       await videoRef.current.play();
+
       detect();
     };
+
+
     const detect = () => {
       if (!landmarkerRef.current || !videoRef.current) return;
 
@@ -95,6 +99,7 @@ export default function FaceExpression() {
       }
     };
   }, []);
+  
   return (
     <div style={{ textAlign: "center" }}>
       <video
